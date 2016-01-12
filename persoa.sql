@@ -12,6 +12,7 @@ create or replace type persoa as object
 	member function get_direct return tipo_direccion,
 	member procedure set_fecha (c date),
 	member function get_fecha return date,
+	member function toStr return varchar2,
 	constructor function persoa (codigo number,nombre varchar2, direct tipo_direccion, fecha_nac date) 
 	return self as result
 	
@@ -51,6 +52,11 @@ create or replace type body persoa as
 		return fecha_nac;
 	end;
 	
+	member function toStr return varchar2 as
+	begin
+		return codigo || ' ' || nombre || ' ' || direct.toStr || ' ' || fecha_nac;
+	end;
+
 	constructor function persoa(codigo number,nombre varchar2, direct tipo_direccion, fecha_nac date) 
 	return self as result
 	is

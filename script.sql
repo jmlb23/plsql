@@ -11,6 +11,7 @@ member procedure set_ciudad (c varchar2),
 member function get_ciudad return varchar2,
 member procedure set_codigo (c number),
 member function get_codigo return number,
+member function toStr return varchar2,
 constructor function tipo_direccion (calle varchar2, ciudad varchar2, codigo_post number)
 return self as result
 ---- A seguinte declaracion indica que os obxectos direccion se van comparar polo seu atributo codigo
@@ -48,6 +49,12 @@ create or replace type body tipo_direccion as
 	begin
 		return codigo_post;
 	end;
+
+	member function toStr return varchar2 as
+	begin
+		return calle || ' ' || ciudad || ' ' || codigo_post;
+	end;
+
 	constructor function tipo_direccion (calle varchar2, ciudad varchar2, codigo_post number)
 	return self as result
 	is
